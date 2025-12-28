@@ -16,28 +16,15 @@ function App()
   },[]);
   // useEffect to handle HLS playback
   useEffect(() => {
+    if (!selectedChannel) return;
     const video = videoRef.current;
-    if (!selectedChannel || !video) return;
-    const url = selectedChannel.url;
-
     if (Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource(url);
+      hls.loadSource(selectedChannel.url);
       hls.attachMedia(video);
-      const onManifest = () => video.play().catch(() => {});
-      hls.on(Hls.Events.MANIFEST_PARSED, onManifest);
-      return () => {
-        hls.off(Hls.Events.MANIFEST_PARSED, onManifest);
-        hls.destroy();
-      };
-    }
-
-    // Native HLS (Safari)
-    const onLoaded = () => video.play().catch(() => {});
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = url;
-      video.addEventListener('loadedmetadata', onLoaded);
-      return () => video.removeEventListener('loadedmetadata', onLoaded);
+      return () => hls.destroy();
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = selectedChannel.url;
     }
   }, [selectedChannel]);
 
@@ -61,6 +48,10 @@ function App()
         <div style={{marginTop: "20px"}}>
           <h2>Now Playing: {selectedChannel.name}</h2>
           <video ref={videoRef} controls width="600">
+            <source
+              src={selectedChannel.url}
+              type="application/x-mpegURL"
+            />
             Your browser does not support the video tag.
           </video>
         </div>

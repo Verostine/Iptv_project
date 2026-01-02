@@ -1,0 +1,5 @@
+#EXTM3U
+#EXTINF:-1,Channel One
+https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8
+#EXTINF:-1,My Local Video
+http://localhost:8000/videos/VID_20251218_092514_624.mp4

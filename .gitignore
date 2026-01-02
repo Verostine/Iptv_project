@@ -1,0 +1,7 @@
+videos/
+*.mp4
+*.mkv
+*.ts
+__pycache__/
+*.pyc
+.env

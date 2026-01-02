@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP TV VIDEO PLAYER``2
+        
+    </title>
+</head>
+<body>
+     <div style={padding: "20px"}>
+      <h1>IPTV Channel List</h1>
+
+      <u1>
+        {channels.map((ch, index)=>(
+         <li
+         key={index}
+         onClick={()=> setSelectedChannel(ch)}
+         style={{cursor: "pointer"}} 
+         >
+          {ch.name}
+         </li>
+        ))}
+      </u1>
+        <video controls width="600>
+         
+        </video>
+      }
+    </div>
+</body>
+</html>
